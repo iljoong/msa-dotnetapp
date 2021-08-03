@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searchsvc
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: searchsvc
+  template:
+    metadata:
+      labels:
+        app: searchsvc
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: searchsvc
+        image: "mtcseouldemo.azurecr.io/searchweb:latest"
+        env:
+        - name: APP_PORT
+          value: "80"
+        - name: HTTP_ENDPOINT
+          value: "http://searchweb/api/search/web;https://searchweb/api/search/images;https://searchweb/api/search/videos"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - name: "http"
+          containerPort: 80
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: searchsvc
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    app: searchsvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: searchweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: searchweb
+  template:
+    metadata:
+      labels:
+        app: searchweb
+    spec:
+      nodeSelector:
+        "beta.kubernetes.io/os": linux
+      containers:
+      - name: searchweb
+        image: "mtcseouldemo.azurecr.io/searchweb:latest"
+        env:
+        - name: APP_PORT
+          value: "80"
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: searchweb
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+  selector:
+    app: searchweb

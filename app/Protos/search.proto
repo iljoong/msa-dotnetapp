@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "SearchSvc";
+
+service SearchEngine {
+  // Search returns a Google search result for the query.
+  rpc Search(SRequest) returns (SResult) {
+  }
+}
+
+message SRequest {
+  string query = 1;
+  bool delay = 2;
+  bool fault = 3;
+  string type = 4;
+  int32 test = 5;
+}
+
+message SResult {
+  string title = 1;
+  string url = 2;
+  string snippet = 3;
+  string log = 4;
+  int32 time = 5;
+}

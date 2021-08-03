@@ -18,7 +18,9 @@ az aks get-credentials --admin -n <aksname> -g <resourcegroup>
 
 ### 3.2 Deploy app to AKS
 
-Review [searchsvc.yaml](aks/yaml/searchsvc.yaml) and deploy search service app to AKS.
+>:information_source: Lab 3 files are located in [aks](../aks) directory.
+
+Review [searchsvc.yaml](../aks/yaml/searchsvc.yaml) and deploy search service app to AKS.
 This deployment will create a public endpoint.
 
 ```bash
@@ -36,7 +38,9 @@ kubectl apply -f searchsvc_ilb.yaml
 Review each searchsvc in the Kubernetes cluster.
 
 ```bash
-$ kubectl get svc
+kubectl get svc
+```
+```
 NAME         TYPE           CLUSTER-IP     EXTERNAL-IP   PORT(S)        AGE
 kubernetes   ClusterIP      10.2.0.1       <none>        443/TCP        5d16h
 searchsvc    LoadBalancer   10.2.169.154   10.1.1.81     80:31851/TCP   4m15s
@@ -46,7 +50,7 @@ searchweb    ClusterIP      10.2.142.75    <none>        80/TCP         4m15s
 Test request using internal load balancer IP.
 
 ```bash
-$ curl http://10.1.1.81/api/web/all
+curl http://10.1.1.81/api/web/all
 ```
 
 - extra
@@ -78,9 +82,11 @@ helm install searchsvc ./searchsvc -n prod
 Run `Apache Benchmarks` to see the performance comparison between sequential and concurrent process.
 
 ```bash
-$ ab -n 100 -c 2 http://10.1.1.81/api/web/seq?delay=true
+ab -n 100 -c 2 http://10.1.1.81/api/web/seq?delay=true
+```
 
-$ ab -n 100 -c 2 http://10.1.1.81/api/web/para?delay=true
+```bash
+ab -n 100 -c 2 http://10.1.1.81/api/web/para?delay=true
 ```
 
 ### 3.5 Integrate AKS with KV for reading application settings (Optional)

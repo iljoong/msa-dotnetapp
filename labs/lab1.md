@@ -8,16 +8,18 @@ Clone sample app repo your VM if you haven't.
 
 Move to `msa-dotnetapp/SearchWeb` directory, update `appsettings.json` and run app.
 
-> update values following settings `ApplicationInsights:InstrumentationKey`, `http:endpoint`, `eh:eventhubname`, `eh:eventhubconn`.
+> Update values of following settings `ApplicationInsights:InstrumentationKey`, `http:endpoint`, `eh:eventhubname`, `eh:eventhubconn`. It is recommend to store/access secret information in/from the Key Vault Service.
 
 ```bash
 dotnet run
 ```
 
-Test locally running app.
+Test locally running app. It simulate to search just the web content.
 
 ```bash
-$ curl -s localhost/api/search/web | jq
+curl -s localhost/api/search/web | jq
+```
+```bash
 {
   "title": "web",
   "url": "https://dotnet.microsoft.com/",
@@ -32,8 +34,9 @@ $ curl -s localhost/api/search/web | jq
 Review `Dockerfile` at the root of sample repo and build docker container locally.
 
 ```bash
-$ docker build -t searchsvc:1 -t searchsvc:latest .
-
+docker build -t searchsvc:1 -t searchsvc:latest .
+```
+```
 docker build -t searchsvc:1 -t searchsvc:latest .
 Sending build context to Docker daemon  9.346MB
 Step 1/15 : FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
@@ -73,6 +76,8 @@ Test container app.
 
 ```bash
 curl -s localhost/api/search/web | jq
+```
+```bash
 {
   "title": "web",
   "url": "https://dotnet.microsoft.com/",

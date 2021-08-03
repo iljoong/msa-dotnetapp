@@ -10,5 +10,5 @@ The sample app is a dotnet version of [msa-goapp](https://github.com/iljoong/msa
 
 0. [Prepare this lab](./labs/lab0.md)
 1. [Build and test container app locally](./labs/lab1.md)
-2. [Run container app in App Service (Linux)](./labs/labq.md)
+2. [Run container app in App Service (Linux)](./labs/lab2.md)
 3. [Run container app in AKS](./labs/lab3.md)

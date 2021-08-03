@@ -8,14 +8,16 @@ Create a new App service and deploy container to App Service. Note that `App Ser
 
 Use following `Web App` name: `<unique-prefix>searchsvc.azurewebsites.net`. (e.g., iksearchsvc.azurewebsites.net)
 
-> Hard coded secrets/credentials in your application is not recommended for security. Instead, it is recommended to pass secrets via ENVIRONMENT variables in App service configuration.
+> :warning: Hard coded secrets/credentials in your application is not recommended for security. Instead, it is recommended to pass secrets via _ENVIRONMENT_ variables in App service configuration.
 
 // capture
 
-Test your application
+Test your application. Just like the previous local test, it simulate to search the web content.
 
 ```bash
-$ curl -s https://iksearchsvc.azurewebsites.net/api/search/web | jq
+curl -s https://iksearchsvc.azurewebsites.net/api/search/web | jq
+```
+```bash
 {
   "title": "web",
   "url": "https://dotnet.microsoft.com/",
@@ -33,30 +35,34 @@ Deploy 3 more apps with same container.
 - iksearchimages.azurewebsites.net
 - iksearchvideos.azurewebsites.net
 
-Add `HTTP_ENDPOINT` environment variable and the value in `iksearchsvc`'s configuration.
+Add `HTTP_ENDPOINT` environment variable and the value in `iksearchsvc`'s configuration. This will simulate to search the web, images and videos contents.
 
 ```
 https://iksearchweb.azurewebsites.net/api/search/web;https://iksearchimages.azurewebsites.net/api/search/images;https://iksearchvideos.azurewebsites.net/api/search/videos
 ```
 
+Test with new search api endpoint (frontend). FYI, Frontend servce api (/api/web) will call 3 backend search apis (web, images, videos) and return aggregate results.
+
 ```bash
-$ curl -s https://iksearchsvc.azurewebsites.net/api/web/seq | jq
+curl -s https://iksearchsvc.azurewebsites.net/api/web/seq | jq
 ```
 
 ### 2.3 Test performance using simulated environment
 
-Run search app with simulated random delay (10 ~ 100 ms)
+Test search with simulated random delay (10 ~ 100 ms)
 
 ```bash
-$ curl -s https://iksearchsvc.azurewebsites.net/api/web/seq?delay=true | jq
+curl -s https://iksearchsvc.azurewebsites.net/api/web/seq?delay=true | jq
 ```
 
-Run `Apache Benchmarks` to see the performance comparison between sequential and concurrent process.
+Run `Apache Benchmarks` to see the performance comparison between sequential and concurrent backend requests.
 
 ```bash
-$ ab -n 100 -c 2 https://iksearchsvc.azurewebsites.net/api/web/seq?delay=true
+ab -n 100 -c 2 https://iksearchsvc.azurewebsites.net/api/web/seq?delay=true
+```
 
-$ ab -n 100 -c 2 https://iksearchsvc.azurewebsites.net/api/web/para?delay=true
+```bash
+ab -n 100 -c 2 https://iksearchsvc.azurewebsites.net/api/web/para?delay=true
 ```
 
 ### 2.4 Monitor your application

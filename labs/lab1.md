@@ -34,10 +34,9 @@ curl -s localhost/api/search/web | jq
 Review `Dockerfile` at the root of sample repo and build docker container locally.
 
 ```bash
-docker build -t searchsvc:1 -t searchsvc:latest .
+docker build -t searchsvc:v1 -t searchsvc:latest .
 ```
 ```
-docker build -t searchsvc:1 -t searchsvc:latest .
 Sending build context to Docker daemon  9.346MB
 Step 1/15 : FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
  ---> fa98367f9017
@@ -103,7 +102,7 @@ Build and push a container to your ACR.
 > login to your azure account, `$ az login`.
 
 ```
-az acr build -r <acr name> -t searchsvc:1 -t searchsvc:latest .
+az acr build -r <acr name> -t searchsvc:v1 -t searchsvc:latest .
 ```
 
 Run a container from ACR.

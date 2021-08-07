@@ -14,6 +14,8 @@ Provision a AKS cluster with CNI or kubenet.
 
 ![AKS CNI](./images/lab3_03.png)
 
+See [Step by step guide](./lab3_tips.md#Step_by_step_guide_to_deploy_AKS) for more detail.
+
 Get k8s credentials and connect to AKS cluster.
 
 ```bash

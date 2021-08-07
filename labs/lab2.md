@@ -12,6 +12,8 @@ Use following `Web App` name: `<unique-prefix>searchsvc.azurewebsites.net`. (e.g
 
 ![provision app service](./images/lab2_02.png)
 
+See [Step by step guide](./lab2_tips.md#Step_by_step_guide_to_deploy_App_Service) for more detail.
+
 Test your application. Just like the previous local test, it simulates searching the web content.
 
 ```bash

@@ -16,12 +16,12 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: searchsvc
-        image: "mtcseouldemo.azurecr.io/searchweb:latest"
+        image: "youracr.azurecr.io/searchsvc:latest"
         env:
         - name: APP_PORT
           value: "80"
         - name: HTTP_ENDPOINT
-          value: "http://searchweb/api/search/web;https://searchweb/api/search/images;https://searchweb/api/search/videos"
+          value: "http://searchweb/api/search/web;http://searchweb/api/search/images;http://searchweb/api/search/videos"
         resources:
           requests:
             cpu: 100m
@@ -63,7 +63,7 @@ spec:
         "beta.kubernetes.io/os": linux
       containers:
       - name: searchweb
-        image: "mtcseouldemo.azurecr.io/searchweb:latest"
+        image: "youracr.azurecr.io/searchsvc:latest"
         env:
         - name: APP_PORT
           value: "80"

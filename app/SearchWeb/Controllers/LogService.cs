@@ -36,12 +36,12 @@ namespace apiapp
         private readonly string _ehConn;
         private readonly string _ehName;
         private readonly bool _use_eh;
-        private readonly ILogger<EhsManager> _logger;
+        private readonly ILogger<EHService> _logger;
 
         private readonly EventHubProducerClient producerClient;
         //private readonly List<string> _buffer = new List<string>();
         private readonly ConcurrentQueue<string> _buffer = new ConcurrentQueue<string>();
-        public EHService(ILogger<EhsManager> logger, IConfiguration config)
+        public EHService(ILogger<EHService> logger, IConfiguration config)
         {
             _ehConn = config["eh:eventhubconn"];
             _ehName = config["eh:eventhubname"];

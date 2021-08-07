@@ -21,7 +21,7 @@ namespace apiapp.Controllers
     {
         private const string _version = "v1";
 
-        private readonly ILogger<HttpfController> _logger;
+        private readonly ILogger<WebController> _logger;
         private readonly IHttpClientFactory _httpFactory;
         private readonly string _webendpoint;
         private readonly string _imgendpoint;
@@ -30,7 +30,7 @@ namespace apiapp.Controllers
         private readonly string _ehConn;
         private readonly string _appPort;
 
-        public WebController(ILogger<HttpfController> logger, IHttpClientFactory httpFactory, IConfiguration config)
+        public WebController(ILogger<WebController> logger, IHttpClientFactory httpFactory, IConfiguration config)
         {
             _httpFactory = httpFactory;
             _logger = logger;

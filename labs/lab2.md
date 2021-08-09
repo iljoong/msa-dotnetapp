@@ -119,6 +119,13 @@ curl -s https://iksearchsvc.azurewebsites.net/api/web/seq?delay=true | jq
 }
 ```
 
+>:information_source: If you want to send log to __Event Hub__, use following query parameter `?log=true`.
+>
+>```bash
+>curl -s "https://iksearchsvc.azurewebsites.net/api/web/seq?log=true" | jq
+> ```
+>
+
 Run `Apache Benchmarks` to see the performance comparison between sequential and concurrent backend requests.
 
 (1) sequential backend request.

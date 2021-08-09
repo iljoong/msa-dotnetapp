@@ -173,6 +173,6 @@ ab -n 100 -c 2 http://10.1.1.81/api/web/seq?delay=true
 ab -n 100 -c 2 http://10.1.1.81/api/web/para?delay=true
 ```
 
-### 3.5 Integrate AKS with KV for reading application settings (Optional)
+### 3.5 Integrate AKS with KV for reading application settings (TBU)
 
 Reference [document](https://docs.microsoft.com/en-us/azure/key-vault/general/key-vault-integrate-kubernetes)

@@ -8,7 +8,7 @@ Clone sample app repo your VM if you haven't.
 
 Move to `msa-dotnetapp/SearchWeb` directory, update `appsettings.json` and run app.
 
-> Update values of following settings `ApplicationInsights:InstrumentationKey`, `http:endpoint`, `eh:eventhubname`, `eh:eventhubconn`. It is recommend to store/access secret information in/from the Key Vault Service.
+>:information_source: Update values of following settings `ApplicationInsights:InstrumentationKey`, `http:endpoint`, `eh:eventhubname`, `eh:eventhubconn`. It is recommend to store/access secret information in/from the Key Vault Service.
 
 ```bash
 dotnet run
@@ -68,7 +68,7 @@ Successfully tagged searchsvc:latest
 Run docker container.
 
 ```bash
-docker run -d -p 80:80 -p 2222:2222 --name searchsvc -e APP_PORT=80 searchsvc:latest
+docker run --rm --name searchsvc -p 80:80 -p 2222:2222 -e APP_PORT=80 -d searchsvc:latest
 ```
 
 Test container app.
@@ -95,7 +95,28 @@ docker rmi
 docker exec it <container name | id> bash
 docker logs <container name | id>
 ```
-### 1.3 Build container with ACR
+
+### 1.3 Run Docker-compose (Optional)
+
+Run `docker-compose` to setup search service application locally.
+
+```
+docker-compose -f docker-compose.yaml up -d
+```
+
+Test application.
+
+```
+curl -s http://localhost/api/web/para | jq
+```
+
+Stop docker-compose.
+
+```
+docker-compose -f docker-compose.yaml down
+```
+
+### 1.4 Build container with ACR
 
 Build and push a container to your ACR.
  

@@ -82,14 +82,15 @@ namespace apiapp.Controllers
         [HttpGet("all")]
         public async Task<ActionResult<SearchResult>> GetAll(
             [FromQuery] bool retry = false,
-            [FromQuery] bool delay = false, [FromQuery] bool fault = false)
+            [FromQuery] bool delay = false, [FromQuery] bool fault = false,
+            [FromQuery] bool log = false, [FromQuery] bool sync = true)
         {
             DateTime start = DateTime.UtcNow;
             SearchResult result = new SearchResult();
 
             string clienttype = (retry) ? "retry" : "default";
             var client = _httpFactory.CreateClient(clienttype);
-            string query = $"?delay={delay}&fault={fault}";
+            string query = $"?delay={delay}&fault={fault}&log={log}&sync={sync}";
 
             result.results = new List<httpResult>();
 
@@ -183,14 +184,15 @@ namespace apiapp.Controllers
         [HttpGet("v3/seq")]
         public async Task<ActionResult<SearchResult>> GetSequentially(
             [FromQuery] bool retry = false,
-            [FromQuery] bool delay = false, [FromQuery] bool fault = false)
+            [FromQuery] bool delay = false, [FromQuery] bool fault = false,
+            [FromQuery] bool log = false, [FromQuery] bool sync = true)
         {
             DateTime start = DateTime.UtcNow;
             SearchResult result = new SearchResult();
 
             string clienttype = (retry) ? "retry" : "default";
             var client = _httpFactory.CreateClient(clienttype);
-            string query = $"?delay={delay}&fault={fault}";
+            string query = $"?delay={delay}&fault={fault}&log={log}&sync={sync}";
 
             result.results = new List<httpResult>();
 
@@ -214,14 +216,15 @@ namespace apiapp.Controllers
         [HttpGet("v3/para")]
         public ActionResult<SearchResult> GetParallelv2(
             [FromQuery] bool retry = false,
-            [FromQuery] bool delay = false, [FromQuery] bool fault = false)
+            [FromQuery] bool delay = false, [FromQuery] bool fault = false,
+            [FromQuery] bool log = false, [FromQuery] bool sync = true)
         {
             DateTime start = DateTime.UtcNow;
             SearchResult result = new SearchResult();
 
             string clienttype = (retry) ? "retry" : "default";
             var client = _httpFactory.CreateClient(clienttype);
-            string query = $"?delay={delay}&fault={fault}";
+            string query = $"?delay={delay}&fault={fault}&log={log}&sync={sync}";
 
             try
             {
@@ -255,8 +258,8 @@ namespace apiapp.Controllers
         [HttpGet("v4/para")]
         public async Task<ActionResult<SearchResult>> GetParallelv3(
             [FromQuery] bool retry = false,
-            [FromQuery] bool delay = false,
-            [FromQuery] bool fault = false
+            [FromQuery] bool delay = false, [FromQuery] bool fault = false,
+            [FromQuery] bool log = false, [FromQuery] bool sync = true
         )
         {
             DateTime start = DateTime.UtcNow;
@@ -264,7 +267,7 @@ namespace apiapp.Controllers
 
             string clienttype = (retry) ? "retry" : "default";
             var client = _httpFactory.CreateClient(clienttype);
-            string query = $"?delay={delay}&fault={fault}";
+            string query = $"?delay={delay}&fault={fault}&log={log}&sync={sync}";
 
             try
             {
@@ -300,8 +303,8 @@ namespace apiapp.Controllers
         [HttpGet("v4/paradual")]
         public async Task<ActionResult<SearchResult>> GetParallelDual(
             [FromQuery] bool retry = false,
-            [FromQuery] bool delay = false,
-            [FromQuery] bool fault = false
+            [FromQuery] bool delay = false, [FromQuery] bool fault = false,
+            [FromQuery] bool log = false, [FromQuery] bool sync = true
         )
         {
             DateTime start = DateTime.UtcNow;
@@ -309,7 +312,7 @@ namespace apiapp.Controllers
 
             string clienttype = (retry) ? "retry" : "default";
             var client = _httpFactory.CreateClient(clienttype);
-            string query = $"?delay={delay}&fault={fault}";
+            string query = $"?delay={delay}&fault={fault}&log={log}&sync={sync}";
 
             try
             {

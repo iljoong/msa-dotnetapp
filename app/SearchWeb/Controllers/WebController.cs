@@ -64,7 +64,7 @@ namespace apiapp.Controllers
         {
             bool _use_eh = (System.Environment.GetEnvironmentVariable("USE_EH") ?? "false").ToLower() == "true";
 
-            return $"Debug: {_webendpoint},{_imgendpoint},{_videndpoint},{_appinstkey},{_ehConn},expUSE_EH={_use_eh}";
+            return $"Debug: {_webendpoint},{_imgendpoint},{_videndpoint},{_appinstkey},{_ehConn},USE_EH={_use_eh}";
         }
 
         [HttpGet()]

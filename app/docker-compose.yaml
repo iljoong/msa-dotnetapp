@@ -1,0 +1,25 @@
+version: "3.9"  # optional since v1.27.0
+services:
+    web:
+        image: searchsvc:latest
+        networks:
+        - searchnet
+    img:
+        image: searchsvc:latest
+        networks:
+        - searchnet
+    vid:
+        image: searchsvc:latest
+        networks:
+        - searchnet
+    searchsvc:
+        image: searchsvc:latest
+        ports:
+        - 80:80
+        environment:
+            HTTP_ENDPOINT: http://web/api/search/web;http://img/api/search/images;http://vid/api/search/videos
+        networks:
+        - searchnet   
+networks:
+    searchnet:
+        name: searchnet

@@ -11,13 +11,14 @@ Move to `msa-dotnetapp/SearchWeb` directory, update `appsettings.json` and run a
 >:information_source: Update values of following settings `ApplicationInsights:InstrumentationKey`, `http:endpoint`, `eh:eventhubname`, `eh:eventhubconn`. It is recommend to store/access secret information in/from the Key Vault Service.
 
 ```bash
+export APP_PORT=8080
 dotnet run
 ```
 
 Test locally running app. It simulate to search just the web content.
 
 ```bash
-curl -s localhost/api/search/web | jq
+curl -s http://localhost:8080/api/search/web | jq
 ```
 ```bash
 {
@@ -74,7 +75,7 @@ docker run --rm --name searchsvc -p 80:80 -p 2222:2222 -e APP_PORT=80 -d searchs
 Test container app.
 
 ```bash
-curl -s localhost/api/search/web | jq
+curl -s http://localhost/api/search/web | jq
 ```
 ```bash
 {
@@ -126,8 +127,17 @@ Build and push a container to your ACR.
 az acr build -r <acr name> -t searchsvc:v1 -t searchsvc:latest .
 ```
 
+> In case you cannot use `az cli`, login to your acr and push the image to your acr.
+>```
+> docker login -u <acr name> -p <password> <login server or acr url>
+> docker tag searchsvc:latest <acr name>.azurecr.io/searchsvc:latest
+> docker push
+>```
+
 Run a container from ACR.
 
-```bash
-docker run -d -p 80:80 -p 2222:2222 --name searchsvc -e APP_PORT=80 <youracr>.azurecr.io/searchsvc:latest
+```
+docker login -u <acr name> -p <password> <login server or acr url>
+
+docker run --rm --name searchsvc -p 80:80 -p 2222:2222 -e APP_PORT=80 -d <acr name>.azurecr.io/searchsvc:latest
 ```

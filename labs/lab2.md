@@ -243,7 +243,7 @@ You can also view [performance](./images/lab2_11.png)
 
 Modify you're application and push new container to ACR.
 
- - update the line 22 in `app/Controllers/WebController.cs` to `private const string _version = "v2";`
+ - update the line 22 in `~/msa-dotnetapp/app/SearchWeb/Controllers/WebController.cs` to `private const string _version = "v2";`
  - push new image to ACR, `az acr build -r <acr name> -t searchsvc:v2 .`
 
 Update new image for the test slot by updating image tag to `v2` in the [Deployment Center](./images/lab2_07.png).
@@ -260,7 +260,7 @@ Run following command before swapping slots.
 watch -n 1 curl -s https://iksearchsvc.azurewebsites.net/api/web
 ```
 
-Swap slots and see the value of htp response.
+Swap slots and see the value of http response.
 
 ![Swap slots](./images/lab2_13.png)
 

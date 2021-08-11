@@ -6,7 +6,7 @@
 
 Clone sample app repo your VM if you haven't.
 
-Move to `msa-dotnetapp/SearchWeb` directory, update `appsettings.json` and run app.
+Move to `~/msa-dotnetapp/app/SearchWeb` directory, update `appsettings.json` and run app.
 
 >:information_source: Update values of following settings `ApplicationInsights:InstrumentationKey`, `http:endpoint`, `eh:eventhubname`, `eh:eventhubconn`. It is recommend to store/access secret information in/from the Key Vault Service.
 
@@ -131,7 +131,7 @@ az acr build -r <acr name> -t searchsvc:v1 -t searchsvc:latest .
 >```
 > docker login -u <acr name> -p <password> <login server or acr url>
 > docker tag searchsvc:latest <acr name>.azurecr.io/searchsvc:latest
-> docker push
+> docker push <acr name>.azurecr.io/searchsvc:latest
 >```
 
 Run a container from ACR.
